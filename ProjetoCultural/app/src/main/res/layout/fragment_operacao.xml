@@ -1,0 +1,179 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".OperacaoFragment">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/operacaolabelOp"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="MiNHA PUBLICAÇÃO"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.441"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.017" />
+
+            <EditText
+                android:id="@+id/editnome"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="nome" />
+
+            <EditText
+                android:id="@+id/editatvex"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="atividade ex" />
+
+            <EditText
+                android:id="@+id/editend"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="endereço" />
+
+            <!--EditText
+                android:id="@+id/editcategoria"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="categoria" /-->
+
+            <TextView
+                android:id="@+id/textviewcategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="categoria"
+                />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+
+                />
+
+
+
+            <EditText
+                android:id="@+id/editcontato"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="contato" />
+
+            <EditText
+                android:id="@+id/editredesc"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:hint="rede social" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/editimg1"
+                android:layout_width="95dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="40dp"
+                android:background="@android:drawable/ic_menu_upload" />
+
+            <ImageView
+                android:id="@+id/editimg2"
+                android:layout_width="95dp"
+                android:layout_height="80dp"
+                android:background="@android:drawable/ic_menu_upload"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/editimg3"
+                android:layout_width="95dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="80dp"
+                android:background="@android:drawable/ic_menu_upload"/>
+
+            <ImageView
+                android:id="@+id/editimg4"
+                android:layout_width="95dp"
+                android:layout_height="80dp"
+                android:background="@android:drawable/ic_menu_upload"/>
+
+        </LinearLayout>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/figMap"
+                android:layout_width="match_parent"
+                android:layout_height="220sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp" />
+
+
+            <Button
+                android:id="@+id/editMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar Localização"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <Button
+                android:id="@+id/attedit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="editar" />
+
+            <Button
+                android:id="@+id/attdelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="deletar" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

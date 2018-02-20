@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Projeto Cultural</string>
+
+    <string name="navigation_drawer_open">Menu projeto cultural</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Configuração</string>
+
+    <string name="title_activity_principal">Projeto cultural</string>
+
+    <string name="maintext">
+        O Projeto cultural mobile é um aplicativo que tem como objetivo aprensentar  \n
+        o estudo feito a finalidade de investigar as dinâmicas sociais de ocupação dos espaços  \n
+        urbanos na cidade de Anápolis que guardam autenticidades e promovam processos de resistência  \n
+        aos fluxos hegemônicos. A partir dos lugares identificados buscou-se organizar uma base de  \n
+        dados inicial que contenha informações sobre a dinamização e fixação de práticas sociais que  \n
+        expressem algum tipo de resistência. Juntamente com essa base de dados digital objetivou-se  \n
+        desenvolver um ambiente digital para fortalecer o diálogo do projeto com a comunidade.  \n
+    </string>
+
+    <string name="maintext2"> \n
+                Nesta medida a sociedade atual apresenta traços de padronização que promovem  \n
+        transformações nos lugares. Com a massificação alguns pontos de encontro que antes eram \n
+        frequentados por um grande número de pessoas perderam a visibilidade que antes era muito \n
+        maior. Podemos citar como exemplos desses locais as feiras com produtos oriundos da fazenda, \n
+        peças teatrais, casas de artesanatos, ações sociais e culturais para comunidade e patrimônios \n
+        históricos, de modo estão atuando como pontos de resistência, sendo uma consequência das \n
+        transformações do espaço geográfico. \n
+    </string>
+
+
+    <string name="title_activity_add">Adiciona publicação</string>
+    <string name="title_activity_map_pub">Mapa cultural</string>
+    <string name="title_activity_act_view_pub">Dados publicados</string>
+    <string name="title_activity_avaliacao">Avaliação da publicação</string>
+</resources>

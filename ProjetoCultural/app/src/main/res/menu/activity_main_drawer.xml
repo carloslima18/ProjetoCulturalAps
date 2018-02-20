@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/suas_pub"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Minhas publicações" />
+
+        <item
+            android:id="@+id/pub_recentes"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Publicações recentes" />
+
+        <item
+            android:id="@+id/mapa"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="mapa" />
+
+
+        <item
+            android:id="@+id/categoria"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Categoria - Aps" >
+
+            <menu >
+                <group android:id="@+id/cat"
+                    android:checkableBehavior="single">
+                    <item android:id="@+id/escolas"
+                        android:title="Escolas" />
+                    <item android:id="@+id/museus"
+                        android:title="Museus" />
+                    <item android:id="@+id/feiras"
+                        android:title="feiras" />
+                    <item android:id="@+id/praças"
+                        android:title="praças" />
+                </group>
+            </menu>
+        </item>
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/pesquisas"
+                android:icon="@drawable/ic_menu_send"
+                android:title="pesquisas" />
+            <item
+                android:id="@+id/contato"
+                android:icon="@drawable/ic_menu_send"
+                android:title="fale conosco" />
+        </menu>
+    </item>
+
+</menu>
