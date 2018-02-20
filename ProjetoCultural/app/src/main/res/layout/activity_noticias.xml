@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.carlos.projetocultural.FrontActivity">
+    tools:context="com.example.carlos.projetocultural.NoticiasActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -40,9 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Sobre o projeto Mobile"
+                android:text="Noticias gerais"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold|italic"
                 tools:text="Sobre o projeto Mobile" />
@@ -52,8 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="8dp"
-                android:contentDescription="@drawable/park"
-                app:srcCompat="@drawable/park" />
+                app:srcCompat="@drawable/mostracult" />
 
             <TextView
                 android:id="@+id/textoFront"
@@ -62,13 +60,12 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/maintext"
+                android:text="@string/noticias"
                 android:textAlignment="viewStart"
                 android:textColor="@color/cast_expanded_controller_background_color"
                 android:textSize="14sp"
                 android:textStyle="bold|italic"
-                android:typeface="serif"
-                tools:text="@string/maintext" />
+                tools:text="@string/noticias" />
 
             <TextView
                 android:id="@+id/texto2"
@@ -78,25 +75,28 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
                 android:textAlignment="viewStart"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/vermais"
+                style="@android:style/Widget.Material.Light.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
-                android:text="ver mais" />
+                android:text="+info" />
 
             <Button
                 android:id="@+id/buttonComentario"
-                android:layout_width="match_parent"
+                style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
-                android:text="Envie seu comentario" />
+                android:text="Detalhes" />
 
         </LinearLayout>
     </ScrollView>
@@ -105,6 +105,7 @@
 
 
 </LinearLayout>
+
 
 
 

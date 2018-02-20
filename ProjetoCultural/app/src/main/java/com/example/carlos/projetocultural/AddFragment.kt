@@ -293,17 +293,19 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
         act.alert("") {
             title = "Escolher fotografia"
             negativeButton("Tirar foto") {
-                try {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    val ms = System.currentTimeMillis()
-                     val fileName = "fotopub_${ms}.jpg"
-                    //  val intent = camera.open(context,fileName) // chama da classe cameraHeper as funções para tirar foto
-                    val fileuri  = Uri.fromFile(File(Environment.getExternalStorageDirectory(), fileName));//camera.getSdCardFile2(fileName)
-                   // uricamera = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", file)
-                    intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, fileuri)
-                    startActivityForResult(intent,REQUEST_IMAGE_CODE) //estarta o intent enviando para o metodo activityResult para tratar o resultado
-                }catch (e:Exception){
-                    Toast.makeText(context, "possivel criar o arquivo", Toast.LENGTH_SHORT).show()
+                if(false) {
+                    try {
+                        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        val ms = System.currentTimeMillis()
+                        val fileName = "fotopub_${ms}.jpg"
+                        //  val intent = camera.open(context,fileName) // chama da classe cameraHeper as funções para tirar foto
+                        val fileuri = Uri.fromFile(File(Environment.getExternalStorageDirectory(), fileName));//camera.getSdCardFile2(fileName)
+                        // uricamera = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", file)
+                        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, fileuri)
+                        startActivityForResult(intent, REQUEST_IMAGE_CODE) //estarta o intent enviando para o metodo activityResult para tratar o resultado
+                    } catch (e: Exception) {
+                        Toast.makeText(context, "possivel criar o arquivo", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             positiveButton("Importar") {

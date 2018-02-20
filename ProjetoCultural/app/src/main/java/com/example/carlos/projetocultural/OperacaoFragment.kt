@@ -347,14 +347,16 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         act.alert("") {
             title = "Escolher fotografia"
             negativeButton("Tirar foto") {
-                try {
-                    val ms = System.currentTimeMillis()
-                    val fileName = "fotopub_${ms}.jpg"
-                    val intent = camera.open(context,fileName) // chama da classe cameraHeper as funções para tirar foto
-                    startActivityForResult(intent,REQUEST_IMAGE_CODE) //estarta o intent enviando para o metodo activityResult para tratar o resultado
+                if(false) {
+                    try {
+                        val ms = System.currentTimeMillis()
+                        val fileName = "fotopub_${ms}.jpg"
+                        val intent = camera.open(context, fileName) // chama da classe cameraHeper as funções para tirar foto
+                        startActivityForResult(intent, REQUEST_IMAGE_CODE) //estarta o intent enviando para o metodo activityResult para tratar o resultado
 
-                }catch (e:Exception){
-                    Toast.makeText(context, "could not create file", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(context, "could not create file", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             positiveButton("Importar") {

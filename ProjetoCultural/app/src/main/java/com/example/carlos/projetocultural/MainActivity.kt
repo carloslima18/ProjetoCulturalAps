@@ -277,7 +277,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
             }
             R.id.pesquisas -> {
-                startActivity(Intent(this, FrontActivity::class.java))
+                startActivity(Intent(this, NoticiasActivity::class.java))
             }
             R.id.contato -> {
                 startActivity(Intent(this, FrontActivity::class.java))

@@ -29,6 +29,25 @@
         transformações do espaço geográfico. \n
     </string>
 
+    <string name="noticias">
+               A Prefeitura de Anápolis, por meio da Secretaria Municipal de
+        Cultura, abriu nesta segunda-feira, 5, as inscrições do Bolsa
+        Cultura para preenchimento de vagas no Corpo de Baile do Teatro
+        Municipal, Coro Sinfônico, Orquestra de Violeiros, Orquestra Jovem
+        e Companhia Anapolina de Teatro. O programa oferece incentivo de
+        R$ 400 para que artistas iniciantes possam investir na sua profissionalização.
+        Para as inscrições são solicitadas cópias dos seguintes documentos:
+        RG, CPF, comprovante de endereço e currículo acompanhado de documentos originais.
+
+    </string>
+
+
+    <string name="noticias2">
+        Inscrições Bolsa Cultura\n
+        Local: Secretaria Municipal de Cultura\n
+        Endereço: Av. São Francisco, nº 269 – Bairro Jundiaí \n
+        Horário: 8h30 às 11h30 – 14h30 às 17h30 \n
+    </string>
 
     <string name="title_activity_add">Adiciona publicação</string>
     <string name="title_activity_map_pub">Mapa cultural</string>
