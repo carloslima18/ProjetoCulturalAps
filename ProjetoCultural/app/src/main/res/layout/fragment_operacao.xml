@@ -7,7 +7,7 @@
 
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
@@ -16,6 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -39,100 +40,168 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.017" />
 
-            <EditText
-                android:id="@+id/editnome"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="nome" />
-
-            <EditText
-                android:id="@+id/editatvex"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="atividade ex" />
-
-            <EditText
-                android:id="@+id/editend"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="endereço" />
-
-            <!--EditText
-                android:id="@+id/editcategoria"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="categoria" /-->
-
-            <TextView
-                android:id="@+id/textviewcategoria"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="categoria"
-                />
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Nome: "
+                    android:textStyle="bold" />
 
-                />
+                <EditText
+                    android:id="@+id/editnome"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="nome" />
 
-
-
-            <EditText
-                android:id="@+id/editcontato"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="contato" />
-
-            <EditText
-                android:id="@+id/editredesc"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:hint="rede social" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/editimg1"
-                android:layout_width="95dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="40dp"
-                android:background="@android:drawable/ic_menu_upload" />
-
-            <ImageView
-                android:id="@+id/editimg2"
-                android:layout_width="95dp"
-                android:layout_height="80dp"
-                android:background="@android:drawable/ic_menu_upload"/>
-
-        </LinearLayout>
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/editimg3"
-                android:layout_width="95dp"
-                android:layout_marginRight="40dp"
-                android:layout_height="80dp"
-                android:background="@android:drawable/ic_menu_upload"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="Atv. Exercida: "
+                    android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/editimg4"
-                android:layout_width="95dp"
-                android:layout_height="80dp"
-                android:background="@android:drawable/ic_menu_upload"/>
+                <EditText
+                    android:id="@+id/editatvex"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="atividade ex" />
 
-        </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:text="Endereço: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editend"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="endereço" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textviewcategoria"
+                    android:layout_width="63dp"
+                    android:layout_height="wrap_content"
+                    android:text="categoria"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Contato: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editcontato"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="contato" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Rede social: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editredesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="rede social" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/editimg1"
+                    android:layout_width="95dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@android:drawable/ic_menu_upload" />
+
+                <ImageView
+                    android:id="@+id/editimg2"
+                    android:layout_width="95dp"
+                    android:layout_height="80dp"
+                    android:background="@android:drawable/ic_menu_upload" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/editimg3"
+                    android:layout_width="95dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@android:drawable/ic_menu_upload" />
+
+                <ImageView
+                    android:id="@+id/editimg4"
+                    android:layout_width="95dp"
+                    android:layout_height="80dp"
+                    android:background="@android:drawable/ic_menu_upload" />
+
+            </LinearLayout>
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/figMap"
@@ -147,30 +216,31 @@
                 android:id="@+id/editMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Editar Localização"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:text="Editar Localização" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-            <Button
-                android:id="@+id/attedit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:text="editar" />
 
-            <Button
-                android:id="@+id/attdelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:text="deletar" />
+                <Button
+                    android:id="@+id/attedit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="editar" />
+
+                <Button
+                    android:id="@+id/attdelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="deletar" />
 
 
             </LinearLayout>

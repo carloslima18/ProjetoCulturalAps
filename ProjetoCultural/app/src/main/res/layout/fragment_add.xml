@@ -17,6 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -40,33 +41,99 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.017" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="Nome: "
+                android:textStyle="bold" />
             <EditText
                 android:id="@+id/editTextnome"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="nome do local"
                 />
 
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="Rede social: "
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/editText3redesocial"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="rede social"
                 />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="63dp"
+                android:layout_height="60dp"
+                android:text="Endere;co: "
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText4end"
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:hint="endereço"
                 />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="Contato: "
+                android:textStyle="bold" />
+
 
             <EditText
                 android:id="@+id/editText5contato"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="contato"
                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:text="Atv. Exercida: "
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText6atvEx"
@@ -75,6 +142,7 @@
                 android:hint="atividade exercida"
                 />
 
+        </LinearLayout>
             <!--EditText
                 android:id="@+id/editText7categoria"
                 android:layout_width="300dp"
@@ -82,21 +150,26 @@
                 android:hint="categoria"
                 android:visibility="invisible"
                 /-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textview7categoria"
-                android:layout_width="wrap_content"
+                android:id="@+id/textviewcategoria"
+                android:layout_width="63dp"
                 android:layout_height="wrap_content"
-                android:hint="categoria"
-                />
+                android:text="categoria"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
 
                 />
 
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ListView
@@ -53,6 +54,7 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_act_view_pub)
         setSupportActionBar(toolbar)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
+         mapViewPub.visibility = View.INVISIBLE
 
         //pega dados do intent
         val extras = intent.extras
@@ -63,11 +65,11 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         atvex = extras.getString("atvex")
 
         //preenche os itens da view dessa activity, com os dados capturados do webService
-        if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+    //    if(AndroidUtils.isNetworkAvailable(applicationContext)) {
             getViewPub()
-        }else{
-            toast("sem coneçcão")
-        }
+    //    }else{
+     //       toast("sem coneçcão")
+     //   }
         ////para o MAPview
         mapView = findViewById<MapView>(R.id.mapViewPub) as MapView
         mapView?.onCreate(savedInstanceState)
@@ -116,6 +118,7 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
                         // Glide.with(applicationContext).load(uri1).asBitmap().override(100, 100).into(img)
                     }
                     dialog.dismiss()
+                    mapViewPub.visibility = View.VISIBLE
                 }else{
                     toast("tente novamente")
                     finish()

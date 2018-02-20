@@ -157,7 +157,7 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
          // On selecting a spinner item
         val item = parent?.getItemAtPosition(position).toString();
         // Showing selected spinner item
-        Toast.makeText(parent?.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent?.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
 
     }

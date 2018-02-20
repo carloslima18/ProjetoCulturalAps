@@ -42,6 +42,7 @@ import com.example.carlos.projetocultural.extensions.setupToolbar
 import com.google.android.gms.internal.zzagr
 import com.google.android.gms.internal.zzagr.runOnUiThread
 import kotlinx.android.synthetic.main.activity_map_pub.*
+import kotlinx.android.synthetic.main.list_row_main.*
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.*
@@ -111,7 +112,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
 
-        if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+
+        //comentadox
+       // if(AndroidUtils.isNetworkAvailable(applicationContext)) {
             lvPubFirst.setOnItemClickListener { parent, view, position, id ->
                 val idx = view.findViewById<TextView>(R.id.idpub).text
                 val long = view.findViewById<TextView>(R.id.textViewLog).text
@@ -127,9 +130,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.putExtra("atvex", atvex.toString())
                 startActivity(intent)
                 // toastx()
-            }
-        }else{
-            toast("verifique sua conecção")
+       //     }
+        //}else{
+        //    toast("verifique sua conecção")
         }
     }
 
@@ -149,6 +152,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
              PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
          }
+
     }
 
     override fun onBackPressed() {
@@ -168,7 +172,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         var listItems :ArrayList<JSONObject> = arrayListOf()
-        val URL = "http:// 192.168.137.113/geolocation/position?_format=json&fields=nome,atvexercida,longitude,latitude"
+        val URL = "http://192.168.43.14/geolocation/position?_format=json&fields=nome,atvexercida,longitude,latitude"
         val dialog = ProgressDialog.show(this, "Um momento","buscando lugares",false,true)
         Thread{
             listItems = pubService.getPub(URL)
@@ -228,7 +232,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     fun PreenchePubFirst(parametro:String){
-        if(AndroidUtils.isNetworkAvailable(applicationContext) ) {
+        //comentadox
+       // if(AndroidUtils.isNetworkAvailable(applicationContext) ) {
             toast("buscando Publicações")
             CL?.clear()
             CL?.notifyDataSetChanged()
@@ -236,9 +241,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             listV.adapter = CL
             val getp = GetRequisitaPub(applicationContext,listV,parametro)
             getp.execute()
-        }else{
-            toast("sem conecção")
-        }
+       // }else{
+       //     toast("sem conecção")
+       // }
 
        /* }else{
             val snack = Snackbar.make(it,"Sem conecção.",Snackbar.LENGTH_LONG)
@@ -278,12 +283,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent(this, FrontActivity::class.java))
             }
             R.id.mapa-> {
-                if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+              //  if(AndroidUtils.isNetworkAvailable(applicationContext)) {
                     toast("Aguarde...")
                     mapa()
-                }else{
+              //  }else{
                     //pegando o nome e coordenadas dos registrados no banco de dados
-                    toast("sem conecção")
+             /*       toast("sem conecção")
                     database = MyDatabaseOpenHelper.getInstance(applicationContext)
                     val longitude:List<String>? = database?.use { select("publicacao", "longitude").exec {parseList(StringParser)} }
                     val latitude:List<String>?  = database?.use { select("publicacao", "latitude").exec { parseList(StringParser) } }
@@ -299,7 +304,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     intent.putExtra("nome",nome?.toTypedArray())
                     intent.putExtra("atvex",atvex?.toTypedArray())
                     startActivity(intent)
-                }
+             //   }*/
 
             }
         }
