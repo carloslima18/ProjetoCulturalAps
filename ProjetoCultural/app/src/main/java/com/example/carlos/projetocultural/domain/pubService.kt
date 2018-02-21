@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 
 object pubService{
-    private val BASE_URL = "http://192.168.43.14/geolocation/position?_format=json"
+    private val BASE_URL = "http://192.168.15.3/geolocation/position?_format=json"
     fun getPub(cond:String):ArrayList<JSONObject>{
         try {
             val url = cond
@@ -57,7 +57,7 @@ object pubService{
     }
 
     fun saveAvaliacaopub(avl: JSONObject): Response{
-        val json = HttpHelper.post("http://192.168.43.14/geolocation/avaliacao?_format=json", avl.toString())
+        val json = HttpHelper.post("http://192.168.15.3/geolocation/avaliacao?_format=json", avl.toString())
         val response = fromJson<Response>(json)
         return response
     }

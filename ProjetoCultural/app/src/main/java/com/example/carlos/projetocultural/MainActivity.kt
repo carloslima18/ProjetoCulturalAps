@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
 
 
-       /* if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+       /* if(Andro.idUtils.isNetworkAvailable(applicationContext)) {
             val listV: ListView = findViewById<ListView>(R.id.lvPubFirst) as ListView
             val getp = GetRequisitaPub(this.applicationContext,listV,"&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
             getp.execute()
@@ -113,8 +113,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
 
-        //comentadox
-       // if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+
+        if(AndroidUtils.isNetworkAvailable(applicationContext)) {
             lvPubFirst.setOnItemClickListener { parent, view, position, id ->
                 val idx = view.findViewById<TextView>(R.id.idpub).text
                 val long = view.findViewById<TextView>(R.id.textViewLog).text
@@ -130,9 +130,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.putExtra("atvex", atvex.toString())
                 startActivity(intent)
                 // toastx()
-       //     }
-        //}else{
-        //    toast("verifique sua conecção")
+            }
+        }else{
+            toast("verifique sua conecção")
         }
     }
 
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         var listItems :ArrayList<JSONObject> = arrayListOf()
-        val URL = "http://192.168.43.14/geolocation/position?_format=json&fields=nome,atvexercida,longitude,latitude"
+        val URL = "http://192.168.15.3/geolocation/position?_format=json&fields=nome,atvexercida,longitude,latitude"
         val dialog = ProgressDialog.show(this, "Um momento","buscando lugares",false,true)
         Thread{
             listItems = pubService.getPub(URL)
@@ -233,7 +233,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun PreenchePubFirst(parametro:String){
         //comentadox
-       // if(AndroidUtils.isNetworkAvailable(applicationContext) ) {
+        if(AndroidUtils.isNetworkAvailable(applicationContext) ) {
             toast("buscando Publicações")
             CL?.clear()
             CL?.notifyDataSetChanged()
@@ -241,9 +241,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             listV.adapter = CL
             val getp = GetRequisitaPub(applicationContext,listV,parametro)
             getp.execute()
-       // }else{
-       //     toast("sem conecção")
-       // }
+        }else{
+            toast("sem conecção")
+        }
 
        /* }else{
             val snack = Snackbar.make(it,"Sem conecção.",Snackbar.LENGTH_LONG)
@@ -283,12 +283,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent(this, FrontActivity::class.java))
             }
             R.id.mapa-> {
-              //  if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+                if(AndroidUtils.isNetworkAvailable(applicationContext)) {
                     toast("Aguarde...")
                     mapa()
-              //  }else{
+                }else{
                     //pegando o nome e coordenadas dos registrados no banco de dados
-             /*       toast("sem conecção")
+                    toast("sem conecção")
                     database = MyDatabaseOpenHelper.getInstance(applicationContext)
                     val longitude:List<String>? = database?.use { select("publicacao", "longitude").exec {parseList(StringParser)} }
                     val latitude:List<String>?  = database?.use { select("publicacao", "latitude").exec { parseList(StringParser) } }
@@ -304,7 +304,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     intent.putExtra("nome",nome?.toTypedArray())
                     intent.putExtra("atvex",atvex?.toTypedArray())
                     startActivity(intent)
-             //   }*/
+                }
 
             }
         }
@@ -362,7 +362,7 @@ teste que deu errado, mas pode servir para algo um dia
         try{
 
             doAsync {
-                if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+                if(Androi.dUtils.isNetworkAvailable(applicationContext)) {
                     pubs = pubService.getPub()
 
                 }else{
@@ -525,7 +525,7 @@ teste que deu errado, mas pode servir para algo um dia
 
 /*      val permissionCheck = ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE)
      val listV: ListView = findViewById<ListView>(R.id.lvPubMain) as ListView
-     if(AndroidUtils.isNetworkAvailable(applicationContext) && permissionCheck == 0) {
+     if(Andr.oidUtils.isNetworkAvailable(applicationContext) && permissionCheck == 0) {
          Thread {
              listItems = pubService.getPub()
              runOnUiThread {

@@ -5,7 +5,7 @@
     <item name="background_textview_main" type="color">#BDBDBD</item>
     <item name="background_linear_main" type="color">#BDBDBD</item>
 
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorPrimary">#60c996</color>
+    <color name="colorPrimaryDark">#50a87e</color>
     <color name="colorAccent">#795548</color>
 </resources>

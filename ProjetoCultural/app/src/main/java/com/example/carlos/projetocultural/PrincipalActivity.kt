@@ -264,7 +264,7 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
                     //dialog (telinha que mostra na tela enviando bublicação e um load enquando faz o envio)
                     //  val dialog = ProgressDialog.show(applicationContext, "Download", "enviando publição, aguarde...", false, true)
                     //  dialog.show()*/
-                    //if(AndroidUtils.isNetworkAvailable(applicationContext))
+                    //if(Andr.oidUtils.isNetworkAvailable(applicationContext))
                     val atcv = this@PrincipalActivity
                     EnviaDados(atcv ,applicationContext, idBD).execute(nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,imgA,imgB,imgC,imgD)
                     //   dialog.dismiss() //fecha a telinha de dialog que mostra o carregamento
@@ -304,10 +304,26 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
             data.put("categoria", params[5])
             data.put("latitude", params[6])
             data.put("longitude", params[7])
-            data.put("img1", camera.uriForBase64(context, params[8]))
-            data.put("img2", camera.uriForBase64(context, params[9]))
-            data.put("img3", camera.uriForBase64(context, params[10]))
-            data.put("img4", camera.uriForBase64(context, params[11]))
+            val img1 =  params[8]
+            val img2 =  params[9]
+            val img3 =  params[10]
+            val img4 =  params[11]
+
+            if(img1 != null){
+                data.put("img1", camera.uriForBase64(context, params[8]))
+            }
+            if(img2 != null){
+                data.put("img2", camera.uriForBase64(context, params[9]))
+            }
+            if(img3 != null){
+                data.put("img3", camera.uriForBase64(context, params[10]))
+            }
+            if(img4 != null){
+                data.put("img4", camera.uriForBase64(context, params[11]))
+            }
+
+
+
             pubService.save(data)
             return null
         }

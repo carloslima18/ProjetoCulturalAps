@@ -65,11 +65,11 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         atvex = extras.getString("atvex")
 
         //preenche os itens da view dessa activity, com os dados capturados do webService
-    //    if(AndroidUtils.isNetworkAvailable(applicationContext)) {
+        if(AndroidUtils.isNetworkAvailable(applicationContext)) {
             getViewPub()
-    //    }else{
-     //       toast("sem coneçcão")
-     //   }
+        }else{
+            toast("sem coneçcão")
+        }
         ////para o MAPview
         mapView = findViewById<MapView>(R.id.mapViewPub) as MapView
         mapView?.onCreate(savedInstanceState)
@@ -89,7 +89,7 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         val dialog = ProgressDialog.show(this, "Um momento","buscando dados",false,true)
 
         Thread{
-          val url =  "http://192.168.43.14/geolocation/position/$id?_format=json&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1,img2,img3,img4"
+          val url =  "http://192.168.15.3/geolocation/position/$id?_format=json&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1,img2,img3,img4"
           listItems = pubService.getPub2(url)
             runOnUiThread {
                 if(listItems.size != 0) {
