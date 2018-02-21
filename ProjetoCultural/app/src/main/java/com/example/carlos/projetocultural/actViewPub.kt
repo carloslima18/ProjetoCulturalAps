@@ -177,15 +177,15 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         nextFtPub.setOnClickListener {
             val img = findViewById<ImageView>(R.id.imgViewPub) as ImageView
             if(i > 4){i = 1}
-            if(i == 1 && bitmap1 != ""){
+            if(i == 1 && bitmap1 != "null"){
                 img.setImageBitmap(camera.base64ForBitmap2(bitmap1))
-            }else if(i == 2 && bitmap2 != ""){
+            }else if(i == 2 && bitmap2 != "null"){
                 img.setImageBitmap(camera.base64ForBitmap2(bitmap2))
             }
-            else if(i == 3 && bitmap3 != ""){
+            else if(i == 3 && bitmap3 != "null"){
                 img.setImageBitmap(camera.base64ForBitmap2(bitmap3))
             }
-            else if(i ==4 && bitmap4 != ""){
+            else if(i ==4 && bitmap4 != "null"){
                 img.setImageBitmap(camera.base64ForBitmap2(bitmap4))
             }
             i++
