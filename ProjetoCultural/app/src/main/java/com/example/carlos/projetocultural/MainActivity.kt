@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val getp = GetRequisitaPub(this.applicationContext,listV,"&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
             getp.execute()
         }else {
-            toast("sem conecção")
+            toast("sem conexão")
         }*/
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // toastx()
             }
         }else{
-            toast("verifique sua conecção")
+            toast("verifique sua conexão")
         }
     }
 
@@ -168,11 +168,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun mapa(){
-
-
-
         var listItems :ArrayList<JSONObject> = arrayListOf()
-        val URL = "http://192.168.15.3/geolocation/position?_format=json&fields=nome,atvexercida,longitude,latitude"
+        val URL = "http://192.168.15.3/geolocation/position?_format=json&fields=id,nome,atvexercida,longitude,latitude"
         val dialog = ProgressDialog.show(this, "Um momento","buscando lugares",false,true)
         Thread{
             listItems = pubService.getPub(URL)
@@ -180,9 +177,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val lat:MutableList<String> = mutableListOf()
                 val log:MutableList<String> = mutableListOf()
                 val nome:MutableList<String> = mutableListOf()
+                val idpub:MutableList<String> = mutableListOf()
                 val atv:MutableList<String> = mutableListOf()
                 var i = 0
                 while(i < listItems.size){
+                    idpub.add(listItems[i].getString("id").toString())
                     nome.add(listItems[i].getString("nome").toString())
                     log.add(listItems[i].get("longitude").toString())
                     lat.add(listItems[i].get("latitude").toString())
@@ -192,10 +191,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if(listItems.size != 0) {
                     val intent = Intent(applicationContext, MapPub::class.java)
                     intent.putExtra("mostrar", "todosLocais")
-                    intent.putExtra("longitude", log?.toTypedArray())
-                    intent.putExtra("latitude", lat?.toTypedArray())
-                    intent.putExtra("nome", nome?.toTypedArray())
-                    intent.putExtra("atvex", atv?.toTypedArray())
+                    intent.putExtra("idpub", idpub.toTypedArray())
+                    intent.putExtra("longitude", log.toTypedArray())
+                    intent.putExtra("latitude", lat.toTypedArray())
+                    intent.putExtra("nome", nome.toTypedArray())
+                    intent.putExtra("atvex", atv.toTypedArray())
                     intent.putExtra("mostrar", "nao")
                     dialog.dismiss()
                     startActivity(intent)
@@ -246,7 +246,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
        /* }else{
-            val snack = Snackbar.make(it,"Sem conecção.",Snackbar.LENGTH_LONG)
+            val snack = Snackbar.make(it,"Sem conexão.",Snackbar.LENGTH_LONG)
             snack.show()
         }*/
 
@@ -282,13 +282,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.contato -> {
                 startActivity(Intent(this, FrontActivity::class.java))
             }
+            R.id.pesquisador -> {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
             R.id.mapa-> {
                 if(AndroidUtils.isNetworkAvailable(applicationContext)) {
                     toast("Aguarde...")
                     mapa()
                 }else{
                     //pegando o nome e coordenadas dos registrados no banco de dados
-                    toast("sem conecção")
+                    toast("sem conexão")
                     database = MyDatabaseOpenHelper.getInstance(applicationContext)
                     val longitude:List<String>? = database?.use { select("publicacao", "longitude").exec {parseList(StringParser)} }
                     val latitude:List<String>?  = database?.use { select("publicacao", "latitude").exec { parseList(StringParser) } }

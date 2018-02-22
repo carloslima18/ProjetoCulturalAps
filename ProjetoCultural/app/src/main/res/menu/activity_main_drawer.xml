@@ -54,7 +54,13 @@
                 android:id="@+id/contato"
                 android:icon="@drawable/ic_menu_send"
                 android:title="fale conosco" />
+            <item
+                android:id="@+id/pesquisador"
+                android:icon="@drawable/ic_menu_send"
+                android:title="pesquisador" />
         </menu>
     </item>
+
+
 
 </menu>

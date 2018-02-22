@@ -15,15 +15,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import android.text.Html
 import android.view.View
 import android.widget.*
 import com.example.carlos.projetocultural.extensions.setupToolbar
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.activity_map_pub.*
+import kotlinx.android.synthetic.main.content_avaliacao.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
@@ -64,6 +62,7 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
 
     override fun onMapReady(mMap: GoogleMap) {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        val mHashMap = HashMap<Marker, Int>()
         // mMap.setMyLocationEnabled(true); //para localização atual
         database = MyDatabaseOpenHelper.getInstance(applicationContext)
 
@@ -73,39 +72,47 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
         val latitude  = extras.getStringArray("latitude")
         val nome = extras.getStringArray("nome")
         val atvex = extras.getStringArray("atvex")
+        val idpub = extras.getStringArray("idpub")
         mostrar = extras.getString("mostrar")   //determina se vai executar certas funções desse metodo (ex, colocamos uma cond. para editar o marcador, ou n),, depende dessa variavel
 
         //os valores passados ocmo long lat, e os demais, podem estar em um array, sendo assim pode conter mais de um valor
         //.. aq se pega o "tamanho do array" passado, para caso tiver, mostre mais marcações no mapa com a iteração
         val tam = longitude!!.size
         var i = 0;
+
         try {
+
             while (i < tam) {  //pega to_do o conteudo passado das coordenadas e coloca no mapa
                 val sydney = LatLng(latitude?.get(i)!!.toDouble(), longitude[i].toDouble()) //coordenadas
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13f));// trata o quão perto mostra a coordenada             //...mMap.animateCamera(CameraUpdateFactory.zoomTo(20f), 20000, null);
-                mMap.addMarker(MarkerOptions().position(sydney).title(nome?.get(i)).snippet(atvex.get(i)).flat(true).rotation(245f))
+                val marker = mMap.addMarker(MarkerOptions().position(sydney).title(nome?.get(i)).snippet(atvex.get(i)).flat(true).rotation(245f))
+                mHashMap.put(marker, idpub.get(i).toInt())
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)) //esqueci
                 //definees propriedades da posicao da camera
                 val cameraPosition = CameraPosition.builder().target(sydney).zoom(13f).bearing(90f).build();
                 // Animate the change in camera view over 2 seconds
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 2000, null);
+                marker?.showInfoWindow()
+                marker?.hideInfoWindow()
                 i++;
             }
+
 
 
             //para fazer as caixas de texto que mostra ao clicar, ou.., ou poder excluir uma marcação
             mMap.setInfoWindowAdapter(object : InfoWindowAdapter {
                 override fun getInfoContents(marker: Marker): View {
                     val tv = TextView(this@MapPub)
-                    tv.text = Html.fromHtml("<b><font color=\"#ff0000\">" + marker.title + ":</font></b> " + marker.snippet)
+                    //tv.text = Html.fromHtml("<b><font color=\"#d32f2f\">" + marker.title + ":</font></b> " + marker.snippet)
                     return tv
                 }
                 override fun getInfoWindow(marker: Marker): View {
+
                     val ll = LinearLayout(this@MapPub)
                     ll.setPadding(10, 10, 10, 10)
-                    ll.setBackgroundColor(Color.GREEN)
+                    ll.setBackgroundColor(Color.LTGRAY)
                     val tv = TextView(this@MapPub)
-                    tv.text = Html.fromHtml("<b><font color=\"#ffffff\">" + marker.title + ":</font></b> " + marker.snippet)
+                    tv.text = Html.fromHtml("<b><font color=\"#311b92\">" + marker.title + ":</font></b> " + marker.snippet)
                     ll.addView(tv)
 
                     //pode confirmar e enviar a localização do marcador
@@ -159,11 +166,21 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
 
             //para quando vc clica no marcador
             mMap.setOnMarkerClickListener { marker ->
+               // toast("clicado no marcador")
                 false
             }
 
             //realizar algo quando toca na etiqueta (caixa de texto) sobre a marcação
             mMap.setOnInfoWindowClickListener { marker ->
+
+                val intent = Intent(applicationContext, actViewPub::class.java)
+                val t =mHashMap.get(marker)
+                intent.putExtra("idpub", mHashMap.get(marker).toString())
+               // intent.putExtra("lat", marker.position.)
+               // intent.putExtra("log", longitude.get(0))
+                intent.putExtra("nome", marker.title.toString())
+                intent.putExtra("atvex", marker.snippet.toString())
+                startActivity(intent)
                 toast("Seu local")
             }
 
