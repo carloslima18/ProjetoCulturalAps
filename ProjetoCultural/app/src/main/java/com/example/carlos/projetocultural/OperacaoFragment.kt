@@ -176,15 +176,21 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
     }
     override fun onStop() {
         super.onStop()
-        mapView?.onStop();
-    }
-    override fun onPause() {
-        super.onPause()
         try {
             context.unregisterReceiver(broadcastReceive())
         }catch (e: Exception){
 
         }
+        mapView?.onStop();
+    }
+    override fun onPause() {
+        try {
+            context.unregisterReceiver(broadcastReceive())
+        }catch (e: Exception){
+
+        }
+        super.onPause()
+
 
         mapView?.onPause()
     }
@@ -237,6 +243,8 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         override fun onReceive(context: Context?, intent: Intent?){
             latitude = intent?.getStringExtra("latMap")?.toDouble()
             longitude = intent?.getStringExtra("logMap")?.toDouble()
+//            context?.unregisterReceiver(broadcastReceive())
+
         }
     }
 

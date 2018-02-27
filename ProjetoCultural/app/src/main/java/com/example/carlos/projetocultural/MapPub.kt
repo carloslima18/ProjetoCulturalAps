@@ -86,7 +86,9 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
                 val sydney = LatLng(latitude?.get(i)!!.toDouble(), longitude[i].toDouble()) //coordenadas
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13f));// trata o quão perto mostra a coordenada             //...mMap.animateCamera(CameraUpdateFactory.zoomTo(20f), 20000, null);
                 val marker = mMap.addMarker(MarkerOptions().position(sydney).title(nome?.get(i)).snippet(atvex.get(i)).flat(true).rotation(245f))
-                mHashMap.put(marker, idpub.get(i).toInt())
+                if(idpub != null) {
+                    mHashMap.put(marker, idpub.get(i).toInt())
+                }
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)) //esqueci
                 //definees propriedades da posicao da camera
                 val cameraPosition = CameraPosition.builder().target(sydney).zoom(13f).bearing(90f).build();
@@ -103,7 +105,7 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
             mMap.setInfoWindowAdapter(object : InfoWindowAdapter {
                 override fun getInfoContents(marker: Marker): View {
                     val tv = TextView(this@MapPub)
-                    //tv.text = Html.fromHtml("<b><font color=\"#d32f2f\">" + marker.title + ":</font></b> " + marker.snippet)
+                    tv.text = Html.fromHtml("<b><font color=\"#d32f2f\">" + marker.title + ":</font></b> " + marker.snippet)
                     return tv
                 }
                 override fun getInfoWindow(marker: Marker): View {
@@ -175,7 +177,9 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
 
                 val intent = Intent(applicationContext, actViewPub::class.java)
                 val t =mHashMap.get(marker)
-                intent.putExtra("idpub", mHashMap.get(marker).toString())
+                if(idpub != null) {
+                    intent.putExtra("idpub", mHashMap.get(marker).toString())
+                }
                // intent.putExtra("lat", marker.position.)
                // intent.putExtra("log", longitude.get(0))
                 intent.putExtra("nome", marker.title.toString())

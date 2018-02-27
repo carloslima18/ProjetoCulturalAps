@@ -179,6 +179,11 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
     }
     override fun onStop() {
         super.onStop()
+        try {
+            context.unregisterReceiver(broadcastReceive())
+        }catch (e: Exception){
+
+        }
         mapView?.onStop();//padrão para o mapView
     }
     override fun onDestroy() {
@@ -190,13 +195,15 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
         mapView?.onLowMemory()//padrão para o mapView
     }
     override fun onPause() {
-        super.onPause()
-        mapView?.onPause()
         try {
             context.unregisterReceiver(broadcastReceive())
         }catch (e: Exception){
 
         }
+        super.onPause()
+
+        mapView?.onPause()
+
     }
 
     override fun onResume() {
@@ -212,6 +219,7 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
 
         /*fica esperando o brosCast quando a função que atualiza a coordenada no mapView na fragment e usada, e retorna
         //as novas coordenadas que o usuario selecionou no mapa*/
+        if(broadcastReceive() != null)
         context.registerReceiver(broadcastReceive(), IntentFilter(MapPub.loc_receiver))
 
         //padrao
@@ -261,6 +269,7 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
         override fun onReceive(context: Context?,intent: Intent?){
             latitude = intent?.getStringExtra("latMap")?.toDouble()
             longitude = intent?.getStringExtra("logMap")?.toDouble()
+  //          context?.unregisterReceiver(broadcastReceive())
         }
     }
 
