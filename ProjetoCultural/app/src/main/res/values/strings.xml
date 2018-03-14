@@ -53,4 +53,8 @@
     <string name="title_activity_map_pub">Mapa cultural</string>
     <string name="title_activity_act_view_pub">Dados publicados</string>
     <string name="title_activity_avaliacao">Avaliação da publicação</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -9,33 +9,84 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragViewPub" />
-
-    <ListView
-        android:id="@+id/lvPubFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:background="@color/background_listview_main"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="2dp"
-        android:longClickable="true"
-        android:clickable="true"
-        android:focusable="true"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/FAB_att"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:tint="#fff000"
-        app:srcCompat="@drawable/quantum_ic_refresh_white_24"
-        tools:layout_editor_absoluteX="328dp"
-        tools:layout_editor_absoluteY="455dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Noticias gerais"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                tools:text="Sobre o projeto Mobile" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/mostracult" />
+
+            <TextView
+                android:id="@+id/textoFront"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/noticias"
+                android:textAlignment="viewStart"
+                android:textColor="@color/cast_expanded_controller_background_color"
+                android:textSize="14sp"
+                android:textStyle="bold|italic"
+                tools:text="@string/noticias" />
+
+            <TextView
+                android:id="@+id/texto2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/vermais"
+                style="@android:style/Widget.Material.Light.Button.Toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:text="+info" />
+
+            <Button
+                android:id="@+id/buttonComentario"
+                style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:text="Detalhes" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

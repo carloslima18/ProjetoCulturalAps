@@ -90,4 +90,39 @@ class Publicacaouser extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Avaliacaopubuser::className(), ['idpubuser' => 'id']);
     }
+
+
+
+function urlsafe_b64encode($string) {
+        $data = base64_encode($string);
+        $data = str_replace(array('+','/','='),array('-','_',''),$data);
+        return $data;
+    }
+
+   /* public function getfoto($img){
+
+        $data = 'data:image/png;base64,'.$img;
+
+        $data = str_replace('data:image/png;base64,', '', $data);
+
+        $data = str_replace(' ', '+', $data);
+
+        $data = base64_decode($data);
+
+        $file = 'cult/images/'.rand() . '.png';
+
+        $success = file_put_contents($file, $data);
+
+        $data = base64_decode($data);
+
+        $source_img = imagecreatefromstring($data);
+
+        $rotated_img = imagerotate($source_img, 90, 0);
+
+        $file = 'cult/images/'. rand(). '.png';
+
+        $imageSave = imagejpeg($rotated_img, $file, 10);
+
+        imagedestroy($source_img);
+    }*/
 }

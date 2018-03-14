@@ -56,6 +56,12 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
     var redesc:String= ""
     var contato:String= ""
     var atvex:String= ""
+    var email:String= ""
+    var campo1:String= ""
+    var campo2:String= ""
+    var campo3:String= ""
+    var campo4:String= ""
+    var campo5:String= ""
    //  var img1:String= ""
     var idx:Int = 0
     var idBD:Int = 0
@@ -96,12 +102,22 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         //recebe os dados da principalActivity atrevez do bundle
-        nome = arguments.getString("nome")
-        categoria = arguments.getString("categoria")
-        endereco = arguments.getString("endereco")
-        redesc = arguments.getString("redesc")
-        contato = arguments.getString("contato")
-        atvex = arguments.getString("atvex")
+        nome = arguments.getString("nomelr")
+        categoria = arguments.getString("categorialr")
+        endereco = arguments.getString("enderecolr")
+        redesc = arguments.getString("redesclr")
+        contato = arguments.getString("contatolr")
+        atvex = arguments.getString("atvexlr")
+
+        email = arguments.getString("emaillr")
+
+
+        campo1 = arguments.getString("campo1lr")
+        campo2 = arguments.getString("campo2lr")
+        campo3 = arguments.getString("campo3lr")
+        campo4 = arguments.getString("campo4lr")
+        campo5 = arguments.getString("campo5lr")
+
         idx = arguments.getInt("idx")
 
         retainInstance
@@ -113,7 +129,7 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
 
 
         // Spinner element
-        spinner = view?.findViewById<Spinner>(R.id.spinner2) as Spinner
+        spinner = view?.findViewById<Spinner>(R.id.categoriaop) as Spinner
         //  var button = view?.findViewById<Button>(R.id.button)
         // Spinner click listener
         spinner?.setOnItemSelectedListener(this);
@@ -130,13 +146,8 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         spinner?.setAdapter(dataAdapter);
 
 
-
-
-
-
-
         //ativa o mapView do Fragment
-        mapView = view?.findViewById<MapView>(R.id.figMap) as MapView
+        mapView = view?.findViewById<MapView>(R.id.figMapAddop) as MapView
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync(this)
 
@@ -223,17 +234,17 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
     var database: MyDatabaseOpenHelper?=null
     fun Buscaimg() {
         val mainact = activity as PrincipalActivity
-        base64_1 = mainact.database?.use { select("publicacao", "img1").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
-        base64_2 = mainact.database?.use { select("publicacao", "img2").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
-        base64_3 = mainact.database?.use { select("publicacao", "img3").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
-        base64_4 = mainact.database?.use { select("publicacao", "img4").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        base64_1 = mainact.database?.use { select("publicacao2", "img1").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        base64_2 = mainact.database?.use { select("publicacao2", "img2").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        base64_3 = mainact.database?.use { select("publicacao2", "img3").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        base64_4 = mainact.database?.use { select("publicacao2", "img4").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
     }
 
 
     fun getlocation(){
         val mainact = activity as PrincipalActivity
-        val latitudeS = mainact.database?.use { select("publicacao", "latitude").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
-        val longitudeS = mainact.database?.use { select("publicacao", "longitude").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        val latitudeS = mainact.database?.use { select("publicacao2", "latitude").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
+        val longitudeS = mainact.database?.use { select("publicacao2", "longitude").whereArgs("_id={id}", "id" to idx).exec { parseSingle(StringParser) } }
         latitude = latitudeS?.toDouble()
         longitude = longitudeS?.toDouble()
     }
@@ -253,28 +264,28 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         Buscaimg()
         if(base64_1 != null) {
             if (numImg == 1 || numImg == 0) {
-                editimg1.setImageURI(null)
-                editimg1.setImageURI(Uri.parse(base64_1))
+                img1op.setImageURI(null)
+                img1op.setImageURI(Uri.parse(base64_1))
                // editimg1.setImageBitmap(camera.base64ToBitmap(base64_1))
             }
         }
         if(base64_2 != null) {
             if (numImg == 2 || numImg == 0) {
-                editimg2.setImageURI(null)
-                editimg2.setImageURI(Uri.parse(base64_2))
+                img2op.setImageURI(null)
+                img2op.setImageURI(Uri.parse(base64_2))
                 //editimg2.setImageURI(Uri.parse(imgB))
             }
         }
         if(base64_3 != null) {
             if (numImg == 3 || numImg == 0) {
-                editimg3.setImageURI(null)
-                editimg3.setImageURI(Uri.parse(base64_3))
+                img3op.setImageURI(null)
+                img3op.setImageURI(Uri.parse(base64_3))
             }
         }
         if(base64_4 != null) {
             if (numImg == 4 || numImg == 0) {
-                editimg4.setImageURI(null)
-                editimg4.setImageURI(Uri.parse(base64_4))
+                img4op.setImageURI(null)
+                img4op.setImageURI(Uri.parse(base64_4))
             }
         }
     }
@@ -289,24 +300,24 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         if (!categoria.equals(null)) {
             spinnerPostion = dataAdapter!!.getPosition(categoria)
         }
-        editnome.setText(nome)
-        spinner2.setSelection(spinnerPostion)
-        editend.setText(endereco)
-        editredesc.setText(redesc)
-        editcontato.setText(contato)
-        editatvex.setText(atvex)
+        nomeop.setText(nome)
+        categoriaop.setSelection(spinnerPostion)
+        enderecoop.setText(endereco)
+        redesocialop.setText(redesc)
+        contatoop.setText(contato)
+        atvexop.setText(atvex)
+        emailop.setText(email)
+        campo1op.setText(campo1)
+        campo2op.setText(campo2)
+        campo3op.setText(campo3)
+        campo4op.setText(campo4)
+        campo5op.setText(campo5)
 
         mapView?.onResume();
 
-
-
         context.registerReceiver(broadcastReceive(), IntentFilter(MapPub.loc_receiver))
 
-
-
-
-
-        editMap.setOnClickListener(){
+        editMapop.setOnClickListener(){
             getlocation()
             val contexto: Activity
             contexto = activity
@@ -330,14 +341,14 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
 
 
         //para quando clicar nas imgs chama o metodo tirafoto para caso necessite a troca(edição)
-        editimg1.setOnClickListener(){tirafoto(1)}
-        editimg2.setOnClickListener(){tirafoto(2)}
-        editimg3.setOnClickListener(){tirafoto(3)}
-        editimg4.setOnClickListener(){tirafoto(4)}
+        img1op.setOnClickListener(){tirafoto(1)}
+        img2op.setOnClickListener(){tirafoto(2)}
+        img3op.setOnClickListener(){tirafoto(3)}
+        img4op.setOnClickListener(){tirafoto(4)}
 
         //ações para os botoes delete e salvar (referente as edições) no fragment. Chamando os reespectivos metodos
-        attedit.setOnClickListener(){onClickupdate()}
-        attdelete.setOnClickListener(){onClickdelete()}
+        atteditop.setOnClickListener(){onClickupdate()}
+        attdeleteop.setOnClickListener(){onClickdelete()}
     }
 
     //variavel para indicar qual foto o usuario vai editar
@@ -387,12 +398,12 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
         val mainact = activity as PrincipalActivity
         val ID = mainact.lvPubPrinc.getAdapter().getItemId(idx)
         mainact.database?.use {
-            update("publicacao", ("img" + edt) to urix
+            update("publicacao2", ("img" + edt) to urix
             )
                     .where("_id = \""+idx+"\"")
                     .exec()
         }
-        val todoCursor=  mainact.database!!.writableDatabase.rawQuery("Select * from publicacao",null)
+        val todoCursor=  mainact.database!!.writableDatabase.rawQuery("Select * from publicacao2",null)
         mainact.CA?.swapCursor(todoCursor)
     }
 
@@ -442,28 +453,28 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
                             //uri1 = data.data
                             //img1.setImageBitmap(bitmap)
                             base64_1 =uri.toString()
-                            editimg1.setImageBitmap(bitmapImg)
+                            img1op.setImageBitmap(bitmapImg)
                             onclickupdate2(1.toString(),uri.toString())
 
                         } else if (numImgx == 2) {
                             //uri2 = data.data
                             // img2.setImageBitmap(bitmap)
                             base64_2 = uri.toString()
-                            editimg2.setImageBitmap(bitmapImg)
+                            img2op.setImageBitmap(bitmapImg)
                             onclickupdate2(2.toString(),uri.toString())
 
                         } else if (numImgx == 3) {
                             // uri3 = data.data
                             //  img3.setImageBitmap(bitmap)
                             base64_3 = uri.toString()
-                            editimg3.setImageBitmap(bitmapImg)
+                            img3op.setImageBitmap(bitmapImg)
                             onclickupdate2(3.toString(),uri.toString())
 
                         } else if (numImgx == 4) {
                             //  uri4 = data.data
                             //img4.setImageBitmap(bitmap)
                             base64_4 =uri.toString()
-                            editimg4.setImageBitmap(bitmapImg)
+                            img4op.setImageBitmap(bitmapImg)
                             onclickupdate2(4.toString(),uri.toString())
 
                         }
@@ -488,13 +499,19 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
 
         val categoria:String = spinner?.selectedItem.toString()
         mainact.database?.use {
-            update("publicacao",
-                    "nome" to editnome.text.toString(),
-                    "redesocial" to editredesc.text.toString(),
-                    "endereco" to editend.text.toString(),
-                    "contato" to editcontato.text.toString(),
-                    "atvexercida" to editatvex.text.toString(),
+            update("publicacao2",
+                    "nome" to nomeop.text.toString(),
+                    "redesocial" to redesocialop.text.toString(),
+                    "endereco" to enderecoop.text.toString(),
+                    "contato" to contatoop.text.toString(),
+                    "email" to emailop.text.toString(),
+                    "atvexercida" to atvexop.text.toString(),
                     "categoria" to categoria,
+                    "campo1" to campo1op.text.toString(),
+                    "campo2" to campo2op.text.toString(),
+                    "campo3" to campo3op.text.toString(),
+                    "campo4" to campo4op.text.toString(),
+                    "campo5" to campo5op.text.toString(),
                     "img1" to base64_1,
                     "img2" to base64_2,
                     "img3" to base64_3,
@@ -505,7 +522,7 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
                     .where("_id = \""+idx+"\"")
                     .exec()
         }
-        val todoCursor=  mainact.database!!.writableDatabase.rawQuery("Select * from publicacao",null)
+        val todoCursor=  mainact.database!!.writableDatabase.rawQuery("Select * from publicacao2",null)
         mainact.CA?.swapCursor(todoCursor)
         dismiss() //fecha o fragment
     }
@@ -518,10 +535,10 @@ class OperacaoFragment : DialogFragment(), OnMapReadyCallback, AdapterView.OnIte
             negativeButton("deletar") {
                 val ID = mainact.lvPubPrinc.getAdapter().getItemId(idx)
                 mainact.database?.use {
-                    delete("publicacao", "_id = \"" + idx + "\"")
+                    delete("publicacao2", "_id = \"" + idx + "\"")
                 }
                 Toast.makeText(context,"Item Deletado!!", Toast.LENGTH_SHORT).show()
-                val todoCursor = mainact.database!!.writableDatabase.rawQuery("Select * from publicacao", null)
+                val todoCursor = mainact.database!!.writableDatabase.rawQuery("Select * from publicacao2", null)
                 mainact.CA?.swapCursor(todoCursor)
                 dismiss()
             }

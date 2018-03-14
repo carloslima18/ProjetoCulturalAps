@@ -64,8 +64,8 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
      //   supportActionBar?.setDisplayShowHomeEnabled(true)
 
         database = MyDatabaseOpenHelper.getInstance(applicationContext) //estancia o BD na variavel para uso com slqLIte
-        todoCursor= database!!.writableDatabase.rawQuery("Select * from publicacao",null) //usa o cursor para armazena a pesquisa do BD
-        CA= ToDoAdapter(this,todoCursor!!)// pega o cursor que ta a consulta com os dados feita na linah de cima, e joga no CA(apapter para ser preenchido a listRow)
+        todoCursor= database!!.writableDatabase.rawQuery("Select * from publicacao2",null) //usa o cursor para armazena a pesquisa do BD
+        CA= ToDoAdapter(this,todoCursor!!,"PrincipalActivity")// pega o cursor que ta a consulta com os dados feita na linah de cima, e joga no CA(apapter para ser preenchido a listRow)
         lvPubPrinc.adapter=CA// seta o adapter da listView com o CursorAdapter criado(que possui a consulta do banco de dados) e seta na listView (fazendo com que a classe toDoAdapter mapeia os dados)
 
         //botao para abrir o fragment para inserir uma bublicação, e tbm verifica permissões necessarias para fazer essa inserção
@@ -190,12 +190,19 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
         val width = size.y
 
         val bundle= Bundle()//bundle para passagem de parametros(dados a baixo) para outra atv
-        bundle.putString("nome",(view?.findViewById<TextView>(R.id.textViewnome))?.text.toString())
-        bundle.putString("categoria",(view?.findViewById<TextView>(R.id.textViewtipo))?.text.toString())
-        bundle.putString("endereco",(view?.findViewById<TextView>(R.id.textViewend))?.text.toString())
-        bundle.putString("redesc",(view?.findViewById<TextView>(R.id.textViewredeSoc))?.text.toString())
-        bundle.putString("contato",(view?.findViewById<TextView>(R.id.textViewcontato))?.text.toString())
-        bundle.putString("atvex",(view?.findViewById<TextView>(R.id.textViewAtcEx))?.text.toString())
+        bundle.putString("nomelr",(view?.findViewById<TextView>(R.id.nomelr))?.text.toString())
+        bundle.putString("categorialr",(view?.findViewById<TextView>(R.id.categorialr))?.text.toString())
+        bundle.putString("enderecolr",(view?.findViewById<TextView>(R.id.enderecolr))?.text.toString())
+        bundle.putString("redesclr",(view?.findViewById<TextView>(R.id.redesociallr))?.text.toString())
+        bundle.putString("contatolr",(view?.findViewById<TextView>(R.id.contatolr))?.text.toString())
+        bundle.putString("emaillr",(view?.findViewById<TextView>(R.id.emaillr))?.text.toString())
+        bundle.putString("atvexlr",(view?.findViewById<TextView>(R.id.atvexlr))?.text.toString())
+        bundle.putString("campo5lr",(view?.findViewById<TextView>(R.id.campo5lr))?.text.toString())
+        bundle.putString("campo1lr",(view?.findViewById<TextView>(R.id.campo1lr))?.text.toString())
+        bundle.putString("campo2lr",(view?.findViewById<TextView>(R.id.campo2lr))?.text.toString())
+        bundle.putString("campo3lr",(view?.findViewById<TextView>(R.id.campo3lr))?.text.toString())
+        bundle.putString("campo4lr",(view?.findViewById<TextView>(R.id.campo4lr))?.text.toString())
+
         bundle.putInt("height", height.toInt())
         bundle.putInt("width",width.toInt())
         bundle.putInt("idx",idx)
@@ -208,12 +215,12 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
     //acionada quando clica e segura na publiação estando na listView
     fun sendServer(view: View?, idBD: Int): Boolean{
         val database: MyDatabaseOpenHelper?=null
-        val longitude = this.database?.use { select("publicacao", "longitude").whereArgs("_id={idBD}", "idBD" to idBD).exec { parseSingle(StringParser).toString() } }
-        val latitude = this.database?.use { select("publicacao", "latitude").whereArgs("_id={idBD}", "idBD" to idBD).exec { parseSingle(StringParser).toString() } }
-        val imgA = this.database?.use { select("publicacao", "img1").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
-        val imgB = this.database?.use { select("publicacao", "img2").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
-        val imgC = this.database?.use { select("publicacao", "img3").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
-        val imgD = this.database?.use { select("publicacao", "img4").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
+        val longitude = this.database?.use { select("publicacao2", "longitude").whereArgs("_id={idBD}", "idBD" to idBD).exec { parseSingle(StringParser).toString() } }
+        val latitude = this.database?.use { select("publicacao2", "latitude").whereArgs("_id={idBD}", "idBD" to idBD).exec { parseSingle(StringParser).toString() } }
+        val imgA = this.database?.use { select("publicacao2", "img1").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
+        val imgB = this.database?.use { select("publicacao2", "img2").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
+        val imgC = this.database?.use { select("publicacao2", "img3").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
+        val imgD = this.database?.use { select("publicacao2", "img4").whereArgs("_id={id}", "id" to idBD).exec { parseSingle(StringParser) } }
 
       //  var byte : ByteArray? = camera.uriToByteArray(applicationContext,Uri.parse(imgA))
 
@@ -235,12 +242,19 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
             // var imgA:String ?= "" ;var imgB:String ?= "" ;var imgC:String ?= "" ;var imgD:String ?= ""
             //var database: MyDatabaseOpenHelper?=null*/
                     //pega os dados atraves da listView(listRow) que estão setados nos textViews
-                    val nome = (view?.findViewById<TextView>(R.id.textViewnome))?.text.toString()
-                    val redesocial = (view?.findViewById<TextView>(R.id.textViewnome))?.text.toString()
-                    val endereco = (view?.findViewById<TextView>(R.id.textViewend))?.text.toString()
-                    val contato = (view?.findViewById<TextView>(R.id.textViewcontato))?.text.toString()
-                    val atvexercida = (view?.findViewById<TextView>(R.id.textViewAtcEx))?.text.toString()
-                    val categoria = (view?.findViewById<TextView>(R.id.textViewtipo))?.text.toString()
+                    val nome = (view?.findViewById<TextView>(R.id.nomelr))?.text.toString()
+                    val redesocial = (view?.findViewById<TextView>(R.id.redesociallr))?.text.toString()
+                    val endereco = (view?.findViewById<TextView>(R.id.enderecolr))?.text.toString()
+                    val contato = (view?.findViewById<TextView>(R.id.contatolr))?.text.toString()
+                    val atvexercida = (view?.findViewById<TextView>(R.id.atvexlr))?.text.toString()
+                    val categoria = (view?.findViewById<TextView>(R.id.categorialr))?.text.toString()
+
+                    val email = (view?.findViewById<TextView>(R.id.emaillr))?.text.toString()
+                    val campo1 = (view?.findViewById<TextView>(R.id.campo1lr))?.text.toString()
+                    val campo2 = (view?.findViewById<TextView>(R.id.campo2lr))?.text.toString()
+                    val campo3 = (view?.findViewById<TextView>(R.id.campo3lr))?.text.toString()
+                    val campo4 = (view?.findViewById<TextView>(R.id.campo4lr))?.text.toString()
+                    val campo5 = (view?.findViewById<TextView>(R.id.campo5lr))?.text.toString()
                     //pega os dados direto do banco de dados (as imagens estão recebdno a img em BASE64)
 
                     /* algumas testes
@@ -266,7 +280,7 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
                     //  dialog.show()*/
                     //if(Andr.oidUtils.isNetworkAvailable(applicationContext))
                     val atcv = this@PrincipalActivity
-                    EnviaDados(atcv ,applicationContext, idBD).execute(nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,imgA,imgB,imgC,imgD)
+                    EnviaDados(atcv ,applicationContext, idBD).execute(nome,redesocial,endereco,contato,email,atvexercida,categoria,latitude,longitude,imgA,imgB,imgC,imgD,campo1,campo2,campo3,campo4,campo5)
                     //   dialog.dismiss() //fecha a telinha de dialog que mostra o carregamento
                 }catch (e:Exception){
                     toast("erro ao enviar publicação")
@@ -300,42 +314,49 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
             data.put("redesocial", params[1])
             data.put("endereco", params[2])
             data.put("contato", params[3])
-            data.put("atvexercida", params[4])
-            data.put("categoria", params[5])
-            data.put("latitude", params[6])
-            data.put("longitude", params[7])
-            val img1 =  params[8]
-            val img2 =  params[9]
-            val img3 =  params[10]
-            val img4 =  params[11]
+            data.put("email", params[4])
+            data.put("atvexercida", params[5])
+            data.put("categoria", params[6])
+            data.put("latitude", params[7])
+            data.put("longitude", params[8])
+            val img1 =  params[9]
+            val img2 =  params[10]
+            val img3 =  params[11]
+            val img4 =  params[12]
+            data.put("campo1", params[13])
+            data.put("campo2", params[14])
+            data.put("campo3", params[15])
+            data.put("campo4", params[16])
+            data.put("campo5", params[17])
+
+
 
             if(img1 != null){
-                data.put("img1", camera.uriForBase64(context, params[8]))
+                data.put("img1", camera.uriForBase64(context, params[9]))
             }
             if(img2 != null){
-                data.put("img2", camera.uriForBase64(context, params[9]))
+                data.put("img2", camera.uriForBase64(context, params[10]))
             }
             if(img3 != null){
-                data.put("img3", camera.uriForBase64(context, params[10]))
+                data.put("img3", camera.uriForBase64(context, params[11]))
             }
             if(img4 != null){
-                data.put("img4", camera.uriForBase64(context, params[11]))
+                data.put("img4", camera.uriForBase64(context, params[12]))
             }
-
-
 
             pubService.save(data)
             return null
         }
+
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             val database: MyDatabaseOpenHelper?=null
             var todoCursor: Cursor?=null
             act.database?.use {
-                delete("publicacao", "_id = \"" + idBd + "\"")
+                delete("publicacao2", "_id = \"" + idBd + "\"")
             }
-            todoCursor = act.database!!.writableDatabase.rawQuery("Select * from publicacao", null)
+            todoCursor = act.database!!.writableDatabase.rawQuery("Select * from publicacao2", null)
             act.CA?.swapCursor(todoCursor)
        //     dialog.dismiss()
             context.toast("publicação enviada")
@@ -349,9 +370,6 @@ class PrincipalActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbac
     override fun onConnectionSuspended(p0: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
-
 
 
 

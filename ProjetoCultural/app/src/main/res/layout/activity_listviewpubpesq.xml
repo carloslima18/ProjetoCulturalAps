@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp"
+    tools:context="com.example.carlos.projetocultural.ListviewpubpesqActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layoutFrag123">
+    </FrameLayout>
+    <ListView
+        android:id="@+id/lvPubpesq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/background_listview_main"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="2dp"
+        android:longClickable="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FAB_pesq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_input_add"
+        tools:layout_editor_absoluteX="328dp"
+        android:tint="#fff000"
+        tools:layout_editor_absoluteY="511dp" />
+
+
+</RelativeLayout>
+
+

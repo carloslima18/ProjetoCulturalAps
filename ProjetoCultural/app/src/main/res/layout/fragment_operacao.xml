@@ -8,26 +8,27 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="13dp">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
+            <!-- text da edicao -->
             <TextView
-                android:id="@+id/operacaolabelOp"
+                android:id="@+id/tituloop"
                 android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="MiNHA PUBLICAÇÃO"
+                android:text="Editar publicação"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -40,30 +41,111 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.017" />
 
+            <!-- nome -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:text="Nome: "
                     android:textStyle="bold" />
-
                 <EditText
-                    android:id="@+id/editnome"
+                    android:id="@+id/nomeop"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:hint="nome" />
-
+                    android:hint="nome do local" />
             </LinearLayout>
 
-
+            <!-- rede social -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/redesclnop"
+                >
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Rede social: "
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/redesocialop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="rede social" />
+            </LinearLayout>
+
+            <!-- endereco -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/endlnop">
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="60dp"
+                    android:text="Endereço: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/enderecoop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="endereço" />
+            </LinearLayout>
+
+            <!-- contato -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/contatolnop">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Contato: "
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/contatoop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="contato" />
+
+            </LinearLayout>
+
+            <!-- email -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/emailllop">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="Email: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/emailop"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="Email" />
+            </LinearLayout>
+
+            <!-- atv exercida -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/atvexllop">
 
                 <TextView
                     android:layout_width="100dp"
@@ -72,37 +154,20 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editatvex"
-                    android:layout_width="match_parent"
+                    android:id="@+id/atvexop"
+                    android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:hint="atividade ex" />
-
+                    android:hint="atividade exercida" />
             </LinearLayout>
 
+            <!--spinner para a categoria -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/categoriallop">
 
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="60dp"
-                    android:text="Endereço: "
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editend"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="endereço" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textviewcategoria"
@@ -112,54 +177,201 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinner2"
+                    android:id="@+id/categoriaop"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
 
                     />
-
             </LinearLayout>
 
 
+            <!--ano inicio-->
             <LinearLayout
+                android:id="@+id/anoiniciollop"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:text="Contato: "
+                    android:text="campo1: "
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editcontato"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="contato" />
-
+                    android:id="@+id/etanoinicioop"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
             </LinearLayout>
 
+            <!-- CNPJ -->
             <LinearLayout
+                android:id="@+id/cnpjllop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="CNPJ: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etcnpjop"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- representacao -->
+            <LinearLayout
+                android:id="@+id/representacaollop"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:text="Rede social: "
+                    android:text="representação: "
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editredesc"
-                    android:layout_width="match_parent"
+                    android:id="@+id/etrepresentacaoop"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- recurso -->
+            <LinearLayout
+                android:id="@+id/recursollop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:hint="rede social" />
+                    android:text="recurso: "
+                    android:textStyle="bold" />
 
+                <EditText
+                    android:id="@+id/etrecursoop"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
             </LinearLayout>
 
+
+            <!-- campo1 -->
+            <LinearLayout
+                android:id="@+id/campo1llop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="campo1: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/campo1op"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- campo2 -->
+            <LinearLayout
+                android:id="@+id/campo2llop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="campo2: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/campo2op"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- campo3 -->
+            <LinearLayout
+                android:id="@+id/campo3llop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="campo3: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/campo3op"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- campo4 -->
+            <LinearLayout
+                android:id="@+id/campo4llop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="campo: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/campo4op"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <!-- Campo5 -->
+            <LinearLayout
+                android:id="@+id/campo5llop"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="campo5: "
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/campo5op"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+
+            <!--campos para imagem 1 e 2-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -167,21 +379,21 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/editimg1"
+                    android:id="@+id/img1op"
                     android:layout_width="95dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="40dp"
                     android:background="@android:drawable/ic_menu_upload" />
 
                 <ImageView
-                    android:id="@+id/editimg2"
+                    android:id="@+id/img2op"
                     android:layout_width="95dp"
                     android:layout_height="80dp"
                     android:background="@android:drawable/ic_menu_upload" />
 
             </LinearLayout>
 
-
+            <!-- campos para imagem 3 e 4 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -189,45 +401,45 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/editimg3"
+                    android:id="@+id/img3op"
                     android:layout_width="95dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="40dp"
                     android:background="@android:drawable/ic_menu_upload" />
 
                 <ImageView
-                    android:id="@+id/editimg4"
+                    android:id="@+id/img4op"
                     android:layout_width="95dp"
                     android:layout_height="80dp"
                     android:background="@android:drawable/ic_menu_upload" />
-
             </LinearLayout>
 
+            <!-- campo para o google map-->
             <com.google.android.gms.maps.MapView
-                android:id="@+id/figMap"
+                android:id="@+id/figMapAddop"
                 android:layout_width="match_parent"
                 android:layout_height="220sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp" />
 
-
+            <!-- edita localizacao butao -->
             <Button
-                android:id="@+id/editMap"
+                android:id="@+id/editMapop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Editar Localização" />
 
-
+            <!-- exclui e altera (botao) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/attedit"
+                    android:id="@+id/atteditop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -235,7 +447,7 @@
                     android:text="editar" />
 
                 <Button
-                    android:id="@+id/attdelete"
+                    android:id="@+id/attdeleteop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -244,6 +456,7 @@
 
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

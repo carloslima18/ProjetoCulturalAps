@@ -46,6 +46,7 @@ import kotlinx.android.synthetic.main.list_row_main.*
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.*
+import org.jetbrains.anko.browse
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
@@ -54,12 +55,7 @@ import kotlin.concurrent.timerTask
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var dialog:ProgressDialog
     var database: MyDatabaseOpenHelper?=null
-    var todoCursor: Cursor?=null
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    protected var pub: String = ""
     val MY_PERMISSIONS_REQUEST_PHONE_CALL = 1 //variaveis para permissões
     val MY_WRITE_EXTERNAL_STORAGE = 1
     val MY_READ_EXTERNAL_STORAGE = 1
@@ -67,19 +63,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val MY_INTERNET = 1
     val MY_ACCESS_FINE_LOCATION = 1
     var CL:Listadapter?= null
-    val STATE_LIST = "State Adapter Data"
 
-    fun getList(): Listadapter? {
-        return CL
-    }
+    val SPLASH_TIME = 4000;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(savedInstanceState!=null){
-            val mListstate = savedInstanceState.getParcelable<Parcelable>(STATE_LIST)
-            lvPubFirst.onRestoreInstanceState(mListstate)
+        val extras = intent.extras
+        if(extras == null){
+            val actt = Intent(this@MainActivity, splashActivity::class.java)
+            startActivity(actt)
         }
+
         setContentView(R.layout.activity_main)
         // setupToolbar(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -87,19 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }*/
-        lvPubFirst.adapter=CL
-       /*   lvPubFirst.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            viewPubFragment(savedInstanceState)
-            toastx()
-        }*/
-
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-
         GetPermission()
-        PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
-
-
        /* if(Andro.idUtils.isNetworkAvailable(applicationContext)) {
             val listV: ListView = findViewById<ListView>(R.id.lvPubFirst) as ListView
             val getp = GetRequisitaPub(this.applicationContext,listV,"&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
@@ -107,52 +90,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }else {
             toast("sem conexão")
         }*/
+
+        vermais.visibility = View.VISIBLE
+        texto2.visibility = View.INVISIBLE
+
+
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
-
-
-
-        if(AndroidUtils.isNetworkAvailable(applicationContext)) {
-            lvPubFirst.setOnItemClickListener { parent, view, position, id ->
-                val idx = view.findViewById<TextView>(R.id.idpub).text
-                val long = view.findViewById<TextView>(R.id.textViewLog).text
-                val lati = view.findViewById<TextView>(R.id.textViewLat).text
-                val nome = view.findViewById<TextView>(R.id.textViewnomeM).text
-                val atvex = view.findViewById<TextView>(R.id.textViewAtcExM).text
-                //viewPubFragment(savedInstanceState)
-                val intent = Intent(applicationContext, actViewPub::class.java)
-                intent.putExtra("idpub", idx.toString())
-                intent.putExtra("lat", long.toString())
-                intent.putExtra("log", lati.toString())
-                intent.putExtra("nome", nome.toString())
-                intent.putExtra("atvex", atvex.toString())
-                startActivity(intent)
-                // toastx()
-            }
-        }else{
-            toast("verifique sua conexão")
-        }
     }
-
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        outState?.putParcelable(STATE_LIST,lvPubFirst.onSaveInstanceState())
-    }
-
-
 
 
     override fun onResume() {
         super.onResume()
+        buttonComentario.setOnClickListener {
+            browse("http://www.anapolis.go.gov.br/portal/multimidia/noticias/ver/inscriasames-para-o-programa-estapo-abertas")
+        }
 
-         FAB_att.setOnClickListener(){
-
-             PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
-         }
-
+        vermais.setOnClickListener{
+            texto2.visibility = View.VISIBLE
+            texto2.text = resources.getString(R.string.noticias2)
+            vermais.visibility = View.INVISIBLE
+        }
     }
 
     override fun onBackPressed() {
@@ -169,7 +129,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun mapa(){
         var listItems :ArrayList<JSONObject> = arrayListOf()
-        val URL = "http://192.168.15.3/geolocation/position?_format=json&fields=id,nome,atvexercida,longitude,latitude"
+        val URL = "http://192.168.15.5/cult/sendpubuser?_format=json&fields=id,nome,atvexercida,longitude,latitude"
         val dialog = ProgressDialog.show(this, "Um momento","buscando lugares",false,true)
         Thread{
             listItems = pubService.getPub(URL)
@@ -208,11 +168,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }.start()
     }
 
-
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
        // menuInflater.inflate(R.menu.main, menu)
@@ -230,8 +185,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
-    fun PreenchePubFirst(parametro:String){
+  /*  fun PreenchePubFirst(parametro:String){
         //comentadox
         if(AndroidUtils.isNetworkAvailable(applicationContext) ) {
             toast("buscando Publicações")
@@ -250,31 +204,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             snack.show()
         }*/
 
-    }
+    }*/
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.escolas -> {
-                PreenchePubFirst("&PublicacaoSearch[categoria]=escola&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
+                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                intent.putExtra("local","escolas")
+                intent.putExtra("param","&PublicacaoSearch[categoria]=escola&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1" )
+                startActivity(intent)
             }
             R.id.praças -> {
-                PreenchePubFirst("&PublicacaoSearch[categoria]=praça&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
+                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                intent.putExtra("local","pracas")
+                intent.putExtra("param","&PublicacaoSearch[categoria]=praça&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1" )
+                startActivity(intent)
             }
             R.id.museus ->{
-                PreenchePubFirst("&PublicacaoSearch[categoria]=museus&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
-
+                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                intent.putExtra("local","museus")
+                intent.putExtra("param","&PublicacaoSearch[categoria]=museus&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1" )
+                startActivity(intent)
             }
             R.id.feiras ->{
-                PreenchePubFirst("&PublicacaoSearch[categoria]=feiras&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
+                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                intent.putExtra("local","feiras")
+                intent.putExtra("param","&PublicacaoSearch[categoria]=feiras&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
+                startActivity(intent)
             }
-
             R.id.suas_pub -> {
                 startActivity(Intent(this, PrincipalActivity::class.java))
             }
             R.id.pub_recentes -> {
-                PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
+                startActivity(Intent(this, HomeActivity::class.java))
+              //  PreenchePubFirst("&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1")
             }
             R.id.pesquisas -> {
                 startActivity(Intent(this, NoticiasActivity::class.java))
@@ -293,10 +258,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     //pegando o nome e coordenadas dos registrados no banco de dados
                     toast("sem conexão")
                     database = MyDatabaseOpenHelper.getInstance(applicationContext)
-                    val longitude:List<String>? = database?.use { select("publicacao", "longitude").exec {parseList(StringParser)} }
-                    val latitude:List<String>?  = database?.use { select("publicacao", "latitude").exec { parseList(StringParser) } }
-                    val nome:List<String>? = database?.use { select("publicacao", "nome").exec { parseList(StringParser) } }
-                    val atvex:List<String>? = database?.use { select("publicacao", "atvexercida").exec { parseList(StringParser) } }
+                    val longitude:List<String>? = database?.use { select("publicacao2", "longitude").exec {parseList(StringParser)} }
+                    val latitude:List<String>?  = database?.use { select("publicacao2", "latitude").exec { parseList(StringParser) } }
+                    val nome:List<String>? = database?.use { select("publicacao2", "nome").exec { parseList(StringParser) } }
+                    val atvex:List<String>? = database?.use { select("publicacao2", "atvexercida").exec { parseList(StringParser) } }
 
 
                     //intent para enviar para o MAPPUB para abrir a tela do mapa
@@ -324,6 +289,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), MY_PERMISSIONS_REQUEST_PHONE_CALL)
         }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), MY_PERMISSIONS_REQUEST_PHONE_CALL)
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAPTURE_AUDIO_OUTPUT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAPTURE_AUDIO_OUTPUT), MY_PERMISSIONS_REQUEST_PHONE_CALL)
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), MY_PERMISSIONS_REQUEST_PHONE_CALL)
+        }
+
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), MY_WRITE_EXTERNAL_STORAGE)
         }
@@ -458,7 +436,7 @@ teste que deu errado, mas pode servir para algo um dia
         CA?.swapCursor(todoCursor)
         CA?.notifyDataSetChanged()
     //---->    lvItems.invalidateViews();
-        sync("http://192.168.15.111/geolocation/position?_format=json")
+        sync("http://192.168.15.111/cult/sendpubuser?_format=json")
     }
     fun sync(url:String){
         val timer = Timer()

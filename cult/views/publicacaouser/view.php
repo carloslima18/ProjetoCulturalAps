@@ -25,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -40,6 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'latitude',
             'longitude',
           //  'geo_gps',
+
+         /*   [
+                'attribute'=>'img1',
+                'value'=> Yii::$app->homeUrl.'uploads/'.base64_decode($model->img1),
+                'format' => ['image',['width'=>'50','height'=>'50']],
+            ],*/
+  /*          [
+                'attribute'=>'img1',
+                'value'=> base64_decode($model->img1),
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ], */
+          //  '<img src="'.base64_decode($model->img1).'" />',
             'img1:ntext',
             'img2:ntext',
             'img3:ntext',

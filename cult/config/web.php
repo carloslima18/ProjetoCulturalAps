@@ -56,6 +56,9 @@ $config = [
             'rules' => [
                 ['class'=>'yii\rest\UrlRule','controller'=>'sendpubuser', 'pluralize'=>false],
                 ['class'=>'yii\rest\UrlRule','controller'=>'sendpubpesq', 'pluralize'=>false],
+                ['class'=>'yii\rest\UrlRule','controller'=>'sendpesquisador', 'pluralize'=>false],
+                ['class'=>'yii\rest\UrlRule','controller'=>'sendavlpubuser', 'pluralize'=>false],
+                ['class'=>'yii\rest\UrlRule','controller'=>'sendavlpubpesq', 'pluralize'=>false],
             ],
         ],
 

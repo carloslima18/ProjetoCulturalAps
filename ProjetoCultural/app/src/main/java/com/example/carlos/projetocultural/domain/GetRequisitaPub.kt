@@ -19,7 +19,7 @@ class GetRequisitaPub(context: Context, listV: ListView, param:String) : AsyncTa
     val lv = listV
     var context = context
     var param = param//192.168.137.113
-    val URL = "http://192.168.15.3/geolocation/position?_format=json$param"
+    val URL = "http://192.168.15.5/cult/sendpubuser?_format=json$param"
 
     override fun onPreExecute(){
         super.onPreExecute()

@@ -71,6 +71,7 @@ import com.bumptech.glide.Glide
 import com.example.carlos.projetocultural.extensions.toast
 import com.example.carlos.projetocultural.utils.ImageUtils
 import com.google.android.gms.internal.zzagr.runOnUiThread
+import kotlinx.android.synthetic.main.fragment_add.view.*
 import java.net.URI
 
 //import com.frosquivel.magicalcamera.Functionallities.PermissionGranted;
@@ -114,10 +115,6 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
 
 
 
-
-
-
-
         // Spinner element
        val spinner = view?.findViewById<Spinner>(R.id.spinner) as Spinner
         //  var button = view?.findViewById<Button>(R.id.button)
@@ -142,7 +139,7 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
         longitude = arguments.getDouble("longitude")
 
         //recebe a instancia do "obj" mapView que se encontra no layout desse fragment
-        mapView = view.findViewById<MapView>(R.id.figMapAdd) as MapView
+        mapView = view.findViewById<MapView>(R.id.figMapAdda) as MapView
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync(this)
 
@@ -209,26 +206,25 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
     override fun onResume() {
         super.onResume()
         //para quando clicar na foto, abrir a opção de tirar foto (do metodo tiraFoto) (os n 1,2,3,4 são referentes a cada imageView da fragment)
-        img1.setOnClickListener(){tirafoto(1)}
+        img1a.setOnClickListener(){tirafoto(1)}
 
-        img2.setOnClickListener(){tirafoto(2)}
+        img2a.setOnClickListener(){tirafoto(2)}
 
-        img3.setOnClickListener(){tirafoto(3)}
+        img3a.setOnClickListener(){tirafoto(3)}
 
-        img4.setOnClickListener(){tirafoto(4)}
+        img4a.setOnClickListener(){tirafoto(4)}
 
         /*fica esperando o brosCast quando a função que atualiza a coordenada no mapView na fragment e usada, e retorna
         //as novas coordenadas que o usuario selecionou no mapa*/
         if(broadcastReceive() != null)
         context.registerReceiver(broadcastReceive(), IntentFilter(MapPub.loc_receiver))
-
         //padrao
         mapView?.onResume();
 
 
         /*vizualizar localização da publicação no mapa, e da a opção de vc adicionar no mapa outra coordenada caso o usuario n esteja no local
         //.. da publicacao, quando for adicionar a mesma*/
-        buttonAddMap.setOnClickListener(){
+        buttonAddMapa.setOnClickListener(){
             //envia a localização da onde a pessoa esta para o MapPub e da a opção caso ela queira mudar o marcador
             val contexto: Activity
             contexto = activity
@@ -246,7 +242,7 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
             startActivity(intent)//estarta a atividade MapPub que mostra o mapa e da opcao da pessoa troca o marcador
         }
 
-        buttonSalvar.setOnClickListener(){onClickCreate()} // para salvar a publicação, adicionando os dados no banco de dados
+        buttonSalvara.setOnClickListener(){onClickCreate()} // para salvar a publicação, adicionando os dados no banco de dados
         // Refresh the state of the +1 button each time the activity receives focus.
     }
 
@@ -387,19 +383,19 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
                             //uri1 = data.data
                             //img1.setImageBitmap(bitmap)
                             base64_1 = uri.toString()
-                            img1.setImageBitmap(bitmapImg)
+                            img1a.setImageBitmap(bitmapImg)
 
                         } else if (numImgx == 2) {
                             base64_2 = uri.toString()
-                            img2.setImageBitmap(bitmapImg)
+                            img2a.setImageBitmap(bitmapImg)
 
                         } else if (numImgx == 3) {
                             base64_3 =uri.toString()
-                            img3.setImageBitmap(bitmapImg)
+                            img3a.setImageBitmap(bitmapImg)
 
                         } else if (numImgx == 4) {
                             base64_4 =uri.toString()
-                            img4.setImageBitmap(bitmapImg)
+                            img4a.setImageBitmap(bitmapImg)
 
                         }
                     }
@@ -424,41 +420,52 @@ class AddFragment() : DialogFragment(), OnMapReadyCallback , AdapterView.OnItemS
     // quando clica no salvar, para salvar os dados da publicação
     //insere os dados da publicação no banco de dados
      fun onClickCreate(){
-        val nome = editTextnome.text.toString()
-        //val categoria = editText7categoria.text.toString()
+        val nome = nomea.text.toString()
+        val redesocial = redesociala.text.toString()
+        val endereco = enderecoa.text.toString()
+        val contato = contatoa.text.toString()
+        val email = emaila.text.toString()
+        val atvexercida = atvexa.text.toString()
         val categoria = spinner.selectedItem.toString()
-        val endereco = editText4end.text.toString()
-        val contato = editText5contato.text.toString()
-        val redesocial = editText3redesocial.text.toString()
-        val atvexercida = editText6atvEx.text.toString()
+        //val aprovado = categoriaa.aprovadoa.toString()
+        val campo1 = campo1a.text.toString()
+        val campo2 = campo2a.text.toString()
+        val campo3 = campo3a.text.toString()
+        val campo4 = campo4a.text.toString()
+        val campo5 = campo5a.text.toString()
+
+
         val PrincpalActivity= activity as PrincipalActivity
          PrincpalActivity.database?.use{
-            insert("publicacao",
+            insert("publicacao2",
                     "nome" to nome,
                     "redesocial" to redesocial,
                     "endereco" to endereco,
                     "contato" to contato,
+                    "email" to email,
                     "atvexercida" to atvexercida,
                     "categoria" to categoria,
+                    "campo1" to campo1,
+                    "campo2" to campo2,
+                    "campo3" to campo3,
+                    "campo4" to campo4,
+                    "campo5" to campo5,
                     "img1" to base64_1,
                     "img2" to base64_2,
                     "img3" to base64_3,
                     "img4" to base64_4,
-                    "longitude" to longitude,
-                    "latitude" to latitude
+                    "longitude" to longitude.toString(),
+                    "latitude" to latitude.toString()
             )
         }
 
         // PrincpalActivity.CA?.notifyDataSetChanged()
          val mainact = activity as PrincipalActivity
-       /* teste para ver se a imagem foi salva corretamente
-         val imgs = mainact.database?.use {
-             select("publicacao", "img1")
-                     .whereArgs("nome={id}", "id" to nome).exec {
-                 parseSingle(StringParser)
-             }
-         }*/
-         val todoCursor=  PrincpalActivity.database!!.writableDatabase.rawQuery("Select * from publicacao",null)
+      //  teste para ver se a imagem foi salva corretamente
+         val imgs = mainact.database?.use { select("publicacao2", "nome").whereArgs("longitude={id}", "id" to longitude.toString()).exec { parseSingle(StringParser) } }
+        val te = imgs
+
+         val todoCursor=  PrincpalActivity.database!!.writableDatabase.rawQuery("Select * from publicacao2",null)
          val old= PrincpalActivity.CA?.swapCursor(todoCursor)
          old?.close()
          dismiss()

@@ -77,7 +77,7 @@ class Listadapter(internal var context: Context, internal var vg: Int, id: Int, 
 
             if (bitmapa != "null") {
                 base64_1.setImageBitmap(camera.base64ForBitmap2(bitmapa))
-                //Glide.with(context).load("o").asBitmap().override(50, 50).diskCacheStrategy(DiskCacheStrategy.ALL).into(base64_1)
+                //Glide.with(context).load().asBitmap().override(50, 50).diskCacheStrategy(DiskCacheStrategy.ALL).into(base64_1)
             }
 
            /* if (bitmapb != "null") {

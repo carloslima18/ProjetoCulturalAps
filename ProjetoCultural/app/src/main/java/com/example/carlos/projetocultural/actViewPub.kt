@@ -89,7 +89,7 @@ class actViewPub : AppCompatActivity(), OnMapReadyCallback {
         val dialog = ProgressDialog.show(this, "Um momento","buscando dados",false,true)
 
         Thread{
-          val url =  "http://192.168.15.3/geolocation/position/$id?_format=json&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1,img2,img3,img4"
+          val url =  "http://192.168.15.5/cult/sendpubuser/$id?_format=json&fields=id,nome,redesocial,endereco,contato,atvexercida,categoria,latitude,longitude,img1,img2,img3,img4"
           listItems = pubService.getPub2(url)
             runOnUiThread {
                 if(listItems.size != 0) {

@@ -8,14 +8,45 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 
+import android.os.Handler
+
+/**
+ * A sample splash screen created by devdeeds.com
+ * by Jayakrishnan P.M
+ */
 class splashActivity : AppCompatActivity() {
+    private var mDelayHandler: Handler? = null
+    private val SPLASH_DELAY: Long = 2000 //3 seconds
+
+    internal val mRunnable: Runnable = Runnable {
+        if (!isFinishing) {
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("x","true")
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        val timer = Timer()
-        timer.schedule(timerTask {
-            toast("bem vindo")
-        },3000)
-        finish()
+
+        //Initialize the Handler
+        mDelayHandler = Handler()
+
+        //Navigate with delay
+        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+
     }
+
+    public override fun onDestroy() {
+
+        if (mDelayHandler != null) {
+            mDelayHandler!!.removeCallbacks(mRunnable)
+        }
+
+        super.onDestroy()
+    }
+
 }

@@ -45,6 +45,9 @@ class MapPub : AppCompatActivity(), OnMapReadyCallback{
         setContentView(R.layout.activity_map_pub)
         setupToolbar(R.id.toolbar)
 
+
+
+
         //setSupportActionBar(toolbar)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
         //Obtenha SupportMapFragment e receba notificações quando o mapa estiver pronto para ser usado.

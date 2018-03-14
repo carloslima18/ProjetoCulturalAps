@@ -4,7 +4,7 @@ import com.google.android.gms.common.ConnectionResult
 import android.os.Bundle
 import com.google.android.gms.common.api.GoogleApiClient
 import android.support.v7.app.AppCompatActivity
-
+import com.google.android.gms.location.LocationServices
 
 
 /**
@@ -67,4 +67,5 @@ class LocationActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallback
         //A conexão com o Google API falhou!
         pararConexaoComGoogleApi()
     }
+
 }
