@@ -28,6 +28,12 @@ class Listadapter(internal var context: Context, internal var vg: Int, id: Int, 
 
     var camera = CameraHelper()
 
+
+   /* fun changeLista(lista: List<Noticia>) {
+        this.lista.addAll(lista)
+        notifyDataSetChanged()
+    }
+ */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

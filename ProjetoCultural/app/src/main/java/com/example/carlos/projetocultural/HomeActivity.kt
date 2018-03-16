@@ -34,6 +34,9 @@ class HomeActivity : AppCompatActivity() {
     var CL:Listadapter?= null
     val STATE_LIST = "State Adapter Data"
 
+
+    private var OFFSET = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +48,20 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         lvPubFirst.adapter=CL
+
+
+        lvPubFirst.setOnScrollListener(object : PubAdapter() {
+            override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                OFFSET += 2
+               // moreData()
+            }
+        })
+
+
+
+
+
+
 
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)

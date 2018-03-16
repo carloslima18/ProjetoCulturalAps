@@ -23,6 +23,7 @@ class SendpubuserController extends ActiveController
         return $actions;
     }
 
+
     public function prepareDataProvider() {
 
         $searchModel = new \app\models\PublicacaouserSearch();

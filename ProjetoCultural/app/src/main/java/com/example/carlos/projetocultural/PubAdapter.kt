@@ -4,36 +4,73 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import kotlinx.android.synthetic.main.list_row_main.view.*
-// Define o construtor que recebe (carros,onClick)
-class PubAdapter(val carros: List<ModelPub>) : RecyclerView.Adapter<PubAdapter.CarrosViewHolder>() {
-    // Retorna a quantidade de carros na lista
-    override fun getItemCount(): Int {
-        return this.carros.size
+import android.widget.TextView
+import android.R.attr.name
+import android.widget.AbsListView
+
+
+abstract class PubAdapter : AbsListView.OnScrollListener {
+    // The minimum amount of items to have below your current scroll position
+    // before loading more.
+    private var visibleThreshold = 2
+    // The current offset index of data you have loaded
+    private var currentPage = 0
+    // The total number of items in the dataset after the last load
+    private var previousTotalItemCount = 0
+    // True if we are still waiting for the last set of data to load.
+    private var loading = true
+    // Sets the starting page index
+    private var startingPageIndex = 0
+
+    constructor() {}
+
+    constructor(visibleThreshold: Int) {
+        this.visibleThreshold = visibleThreshold
     }
-    // Infla o layout do adapter e retorna o ViewHolder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarrosViewHolder {
-        // Infla a view do adapter
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_row_main, parent, false)
-        // Retorna o ViewHolder que contém todas as views
-        val holder = CarrosViewHolder(view)
-        return holder
+
+    constructor(visibleThreshold: Int, startPage: Int) {
+        this.visibleThreshold = visibleThreshold
+        this.startingPageIndex = startPage
+        this.currentPage = startPage
     }
-    // Faz o bind para atualizar o valor das views com os dados do Carro
-    override fun onBindViewHolder(holder: CarrosViewHolder, position: Int) {
-        // Recupera o objeto carro
-        val carro = carros[position]
-        val view = holder.itemView
-        with(view) {
-            // Atualiza os dados do carro
-          //  textViewnome.text = carro.nome
-            // Faz o download da foto e mostra o ProgressBar
-            //img.loadUrl(carro.urlFoto, progress)
-            // Adiciona o evento de clique na linha
-          //  setOnClickListener { onClick(carro) }
+
+    // This happens many times a second during a scroll, so be wary of the code you place here.
+    // We are given a few useful parameters to help us work out if we need to load some more data,
+    // but first we check if we are waiting for the previous load to finish.
+    override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
+        // If the total item count is zero and the previous isn't, assume the
+        // list is invalidated and should be reset back to initial state
+        if (totalItemCount < previousTotalItemCount) {
+            this.currentPage = this.startingPageIndex
+            this.previousTotalItemCount = totalItemCount
+            if (totalItemCount == 0) {
+                this.loading = true
+            }
+        }
+        // If it’s still loading, we check to see if the dataset count has
+        // changed, if so we conclude it has finished loading and update the current page
+        // number and total item count.
+        if (loading && totalItemCount > previousTotalItemCount) {
+            loading = false
+            previousTotalItemCount = totalItemCount
+            currentPage++
+        }
+
+        // If it isn’t currently loading, we check to see if we have breached
+        // the visibleThreshold and need to reload more data.
+        // If we do need to reload some more data, we execute onLoadMore to fetch the data.
+        if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
+            onLoadMore(currentPage + 1, totalItemCount)
+            loading = true
         }
     }
-    // ViewHolder fica vazio pois usamos o import do Android Kotlin Extensions
-    class CarrosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    // Defines the process for actually loading more data based on page
+    abstract fun onLoadMore(page: Int, totalItemsCount: Int)
+
+    override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {
+        // Don't take any action on changed
     }
 }

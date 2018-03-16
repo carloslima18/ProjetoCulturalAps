@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_pesquisadorhome.*
+import org.jetbrains.anko.browse
 
 class PesquisadorhomeActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class PesquisadorhomeActivity : AppCompatActivity() {
             startActivity(Intent(this, FormActivity::class.java))
         }
         buttonviewmappubpesq.setOnClickListener {
-
+            browse("http://192.168.15.5:8765/")
         }
     }
 }
